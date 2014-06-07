@@ -1,0 +1,27 @@
+<div class="main">
+	<% @photos.each do |photo| %>
+		<div class="photo_all">
+			<table>
+				<tr>
+					<td>
+						<div class="photo">	
+							<img src=<%= "/images/" + photo.file_name %>></img>
+							<h3>Photo Created: <%= photo.date_time %></h3>
+						</div>
+					</td>
+					<td>
+						<div class="comments">
+							<h2>Comments:</h2>
+							<% comments = photo.comments %>
+							<% comments.each do |comment| %>
+								<% name = comment.user.first_name + " " + comment.user.last_name + ": " %>	
+								<p class="comment"><%= link_to name, :controller => "photos", :action => "index", :id => comment.user.id %><%= comment.comment %></p>
+								<p class="timestamp">Commented: <%= comment.date_time %></p>
+							<% end %>
+						</div>
+					</td>
+				<tr>
+			</table>
+		</div>
+	<% end %>
+</div>
